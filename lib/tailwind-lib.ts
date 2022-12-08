@@ -1,19 +1,15 @@
 import "@johnlindquist/kit"
 
 export async function getTailwindProjects() {
-    let directoriesRaw = await readdir(`${home()}/WebstormProjects`, {
-        withFileTypes: true,
-    });
-
-    let tailwindDirectories = []
-    for (let directory of directoriesRaw) {
-        // if it is a folder
-        if (directory.isDirectory()) {
-            // if it has a tailwind.config.js
-            if (await isFile(`${home()}/WebstormProjects/${directory.name}/tailwind.config.js`)) {
-                tailwindDirectories.push(directory.name)
-            }
+    let directories = await readdir(
+        await env("PROJECTS_FOLDER", "In which folder do you store all projects?"),
+        {
+            withFileTypes: true,
         }
-    }
-    return tailwindDirectories
+    );
+
+    return directories
+        .filter((directory) => directory.isDirectory())
+        .filter(async (directory) => await isFile(`${await env("PROJECTS_FOLDER")}/${directory.name}/tailwind.config.js`))
+        .map((directory) => directory.name);
 }

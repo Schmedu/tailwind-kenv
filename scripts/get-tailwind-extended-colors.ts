@@ -1,4 +1,4 @@
-// Name: Get Tailwind Config
+// Name: Get Tailwind Extended Colors
 // Author: Eduard Uffelmann
 // Twitter: @schmedu_
 
