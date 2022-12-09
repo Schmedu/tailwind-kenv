@@ -8,8 +8,12 @@ export async function getTailwindProjects() {
         }
     );
 
-    return directories
-        .filter((directory) => directory.isDirectory())
-        .filter(async (directory) => await isFile(`${await env("PROJECTS_FOLDER")}/${directory.name}/tailwind.config.js`))
-        .map((directory) => directory.name);
+    let tailwindDirectories = []
+    for (let directory of directories.filter((dirent) => dirent.isDirectory())) {
+        // if it has a tailwind.config.js
+        if (await isFile(`${home()}/WebstormProjects/${directory.name}/tailwind.config.js`)) {
+            tailwindDirectories.push(directory.name)
+        }
+    }
+    return tailwindDirectories
 }
