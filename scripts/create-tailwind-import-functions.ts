@@ -1,4 +1,4 @@
-// Name: Create Tailwind Import functions
+// Name: Create Tailwind Import implementations
 // Author: Eduard Uffelmann
 // Twitter: @schmedu_
 /// Watch: ~/WebstormProjects/*
